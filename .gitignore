@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# generated artifacts
+.out/
+*.stl
+*.blend
+*.blend1
+
+# rendered images, except the committed flagship renders under each docs/
+*.png
+!*/docs/*.png

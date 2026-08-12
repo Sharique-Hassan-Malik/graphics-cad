@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.blend
+*.blend1
+.out/
+*.png
+!docs/*.png
