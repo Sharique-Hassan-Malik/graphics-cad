@@ -1,4 +1,4 @@
-# sdf-mesher
+# SDF Mesher
 
 Model 3D solids with **signed distance fields** and constructive solid geometry, then extract a **watertight, correctly-oriented triangle mesh** with **marching tetrahedra**. This is the geometry pipeline behind metaballs, voxel/destructible terrain, procedural props, and any "smooth blob" you have seen in a game or a shader — built from scratch in NumPy: the distance fields, the CSG algebra, the isosurface extractor, and the topology checks that prove the result is a real solid.
 

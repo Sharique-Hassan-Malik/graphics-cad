@@ -1,4 +1,4 @@
-# procedural-terrain
+# Procedural Terrain
 
 Generate 3D landscapes the way games do: **fractal noise** for the raw elevation, **droplet-based hydraulic erosion** to carve valleys and lay down sediment, then a **watertight mesh** and a cartographic **2D map**. Built from scratch in NumPy — the value noise and fractal Brownian motion, the erosion simulation, the hillshaded colour map, a hand-rolled PNG writer, and the terrain-to-solid mesher. Blender renders the result in 3D; it is optional.
 

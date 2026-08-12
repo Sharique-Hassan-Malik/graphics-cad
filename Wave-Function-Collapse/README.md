@@ -1,4 +1,4 @@
-# wave-function-collapse
+# Wave Function Collapse
 
 **Wave Function Collapse** (WFC) is the constraint-based procedural generator behind a wave of modern game content — tilemaps, dungeons, textures, level layouts. You give it a set of tiles and the rules for which tiles may sit next to which; it fills a grid so that **every** adjacency is legal, producing output that looks hand-authored but is generated from a seed. This is a from-scratch implementation: the tile/socket model, the collapse-and-propagate solver, an independent legality verifier, a from-scratch PNG writer, and a lift into 3D via Blender.
 
