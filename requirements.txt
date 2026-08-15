@@ -1,0 +1,5 @@
+# Geometry is plain numpy. Blender is a backend, never a dependency: every
+# generator produces and validates meshes without it, and emits a build script
+# when it is not installed.
+numpy>=1.24
+pytest>=7

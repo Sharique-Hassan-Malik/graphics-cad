@@ -1,9 +1,0 @@
-__pycache__/
-*.py[cod]
-.pytest_cache/
-*.stl
-*.blend
-*.blend1
-*.png
-.out/
-!docs/*.png
