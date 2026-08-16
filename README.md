@@ -116,6 +116,23 @@ pip install -e .
 numpy is the only dependency. Blender is found if present and worked around if
 not.
 
+## Getting Blender
+
+Every generator works without it — meshes, solvers and exporters are pure
+Python. Blender is needed only for the rendering path, and the seven tests that
+exercise it skip themselves by name when it is absent.
+
+It does not need installing or root. The official tarball is self-contained:
+
+```bash
+mkdir -p ~/.local/opt && cd ~/.local/opt
+curl -O https://download.blender.org/release/Blender4.0/blender-4.0.2-linux-x64.tar.xz
+tar -xf blender-4.0.2-linux-x64.tar.xz
+```
+
+`find_blender()` looks there, so nothing else is required. Set `$BLENDER_BIN`
+to override. Verified against 4.0.2.
+
 ## Tests
 
 ```bash
