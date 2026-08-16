@@ -19,6 +19,7 @@ writes its own scene.
 
 from __future__ import annotations
 
+import glob
 import os
 import shutil
 import subprocess
@@ -40,6 +41,17 @@ _COMMON_LOCATIONS = (
     "/Applications/Blender.app/Contents/MacOS/Blender",
 )
 
+#: Where an unpacked official tarball ends up. Blender ships as a self-contained
+#: archive that needs no install and no root, which is how you get it on a
+#: machine you do not administer -- and is therefore the likeliest place for it
+#: to be sitting unfound. Globbed because the version is in the directory name.
+_PORTABLE_PATTERNS = (
+    "~/.local/opt/blender-*/blender",
+    "~/opt/blender-*/blender",
+    "~/blender-*/blender",
+    "/opt/blender-*/blender",
+)
+
 
 def find_blender(explicit: str | None = None) -> str | None:
     """Locate a Blender executable: an explicit path, `$BLENDER_BIN`, `PATH`, then
@@ -55,6 +67,11 @@ def find_blender(explicit: str | None = None) -> str | None:
         expanded = os.path.expanduser(path)
         if os.path.exists(expanded):
             return expanded
+    for pattern in _PORTABLE_PATTERNS:
+        # Newest version last in sort order, so prefer it.
+        matches = sorted(glob.glob(os.path.expanduser(pattern)))
+        if matches:
+            return matches[-1]
     return None
 
 
