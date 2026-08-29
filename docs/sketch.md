@@ -70,7 +70,7 @@ The step is **Gauss–Newton first, Levenberg–Marquardt as a safety net**:
 1. Try the full least-squares step `δ = argmin ‖J δ + r‖`, via `lstsq`. Near the solution this converges quadratically, and `lstsq` also does the right thing when `J` is rank-deficient (an under-constrained sketch) by returning the minimum-norm step instead of blowing up.
 2. If that step does not *decrease the objective* `‖r‖²`, it overshot — fall back to the damped normal equations `(JᵀJ + λI) δ = −Jᵀr`, growing λ until a step reduces the objective. λ shrinks again on success, so the method drifts back toward pure Newton as it homes in.
 
-Acceptance is tested on the least-squares objective `‖r‖²`, not the max-norm — using the max-norm as the gate rejects good steps that trade a large drop in most residuals for a tiny rise in one, and turns a six-iteration solve into a hundred-iteration crawl. (That bug is real; it is why the well-conditioned formulations below matter.)
+Acceptance is tested on the least-squares objective `‖r‖²`, not the max-norm — using the max-norm as the gate rejects good steps that trade a large drop in most residuals for a tiny rise in one, and turns a six-iteration solve into a hundred-iteration crawl.
 
 ## 4. Degrees of freedom = rank of the Jacobian
 
