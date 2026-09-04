@@ -25,10 +25,10 @@ the CAD one.
 `geokit.mesh` is the union of all three, and a test names those four methods
 specifically so a future tidy-up cannot quietly drop them again.
 
-Each generator's `mesh.py` is now a re-export, which keeps every existing
-`from partkit.mesh import Mesh` working and — more usefully — means the modules'
-own test suites verified the merge: 122 tests across the seven passed before and
-after, unchanged.
+Each generator's `mesh.py` is a re-export, so `from partkit.mesh import Mesh`
+resolves to the shared type. That keeps each module's own suite meaningful: the
+122 tests across the seven exercise the shared `Mesh` through each generator's
+own import path, rather than a private copy that happens to agree.
 
 ## One Blender path, and a deliberate line
 

@@ -33,20 +33,20 @@ That command works on the output of *any* of the seven. It could not before:
 each generator carried its own `Mesh` class with its own subset of the checks,
 so a terrain mesh could not be validated with the CAD tools and vice versa.
 
-## What was written seven times
+## What is shared, and why
 
 `find_blender()` — the function that looks for a Blender binary in `$BLENDER_BIN`,
-then `PATH`, then the usual install locations — existed **once per generator**,
-along with the `from_pydata` boilerplate and the headless-invocation plumbing.
-There is now one copy in [`geokit/blender.py`](geokit/blender.py), and a test
-asserts there is still only one.
+then `PATH`, then the usual install locations — lives once in
+[`geokit/blender.py`](geokit/blender.py), with the `from_pydata` boilerplate and
+the headless-invocation plumbing. A test asserts there is only one copy: seven
+generators each finding Blender their own way is seven different failure messages
+for one missing binary.
 
-`Mesh` existed three times. All three agreed on the representation — vertices
-N×3, triangles M×3 — and disagreed about which checks existed: only the CAD one
-had manifold and orientation checks, only the SDF one had `genus` and per-face
-normals. [`geokit/mesh.py`](geokit/mesh.py) is the **union**, so the merge added
-capability to every generator rather than taking the largest and discarding the
-rest.
+`Mesh` is one type for the same reason. The representation is uncontroversial —
+vertices N×3, triangles M×3 — but the *checks* are where copies drift apart, so
+[`geokit/mesh.py`](geokit/mesh.py) carries the union of them: manifold and
+orientation checks alongside `genus` and per-face normals. Every generator gets
+all of them, and `geo check` means the same thing whatever produced the mesh.
 
 **What is not shared: the scene.** A terrain slab lit by a low sun, a CAD part
 on a neutral backdrop and an animated crank are genuinely different scenes.

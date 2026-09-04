@@ -84,7 +84,8 @@ class TestLayout:
         )
 
     def test_find_blender_is_defined_exactly_once(self):
-        """It was written out seven times, once per generator."""
+        """Seven generators finding Blender seven ways is seven different
+        failure messages for one missing binary."""
         found = self._sources_containing("def find_blender")
         assert [p.name for p in found] == ["blender.py"], found
 
@@ -106,10 +107,10 @@ class TestSharedMesh:
         assert not open_box.is_watertight()
         assert len(open_box.boundary_edges()) == 4
 
-    def test_the_methods_that_only_one_copy_had_survived_the_merge(self, tetrahedron):
-        """`genus`, `face_normals`, `face_centroids` and `oriented` were only in
-        the SDF mesher's copy. Losing them would have made the merge a
-        regression."""
+    def test_the_whole_check_set_is_on_the_shared_type(self, tetrahedron):
+        """`genus`, `face_normals`, `face_centroids` and `oriented` must be
+        available to every generator, not just the ones that needed them
+        first — otherwise `geo check` means different things per mesh."""
         assert tetrahedron.genus() == 0
         assert tetrahedron.face_normals().shape == (4, 3)
         assert tetrahedron.face_centroids().shape == (4, 3)

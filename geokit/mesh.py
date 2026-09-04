@@ -159,8 +159,9 @@ class Mesh:
             offset += len(m.vertices)
         return Mesh(np.vstack(verts), np.vstack(faces))
 
-    # -- brought across from the SDF mesher's copy, so nothing was lost in
-    # -- the merge: genus and per-face vectors were only in that one.
+    # -- Per-face vectors and genus. Only the SDF workflow needs these
+    # -- routinely, but they belong on the shared type: a check that exists for
+    # -- one generator and not another is how `geo check` stops meaning one thing.
 
     def face_normals(self) -> np.ndarray:
         v0, v1, v2 = (self.vertices[self.faces[:, i]] for i in range(3))
